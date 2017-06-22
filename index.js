@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 // logical
 const NO_OF_Y = 6;
 const NO_OF_X = 7;
@@ -18,8 +19,8 @@ const CURRENT_GAME = {
   status: 1,
   display_message : '',
   turn:1
+};
 
-}
 let BOARD = new Array(NO_OF_X);
 
 $(document).ready(function(){
@@ -30,12 +31,12 @@ const init_menu = function _init_menu(){
   $('#Game_container').hide();
   $('#Game_menu').show();
 
-}
+};
 /** this is the function to start the game ***/
 const start_game = function _start_game(game_mode){
   CURRENT_GAME.game_mode = game_mode;
   init_board();
-}
+};
 
 
 const init_board = function _init_board(){
@@ -47,7 +48,7 @@ const init_board = function _init_board(){
 
 
 
-}
+};
 /***** Status panel ****/
 
 
@@ -73,7 +74,7 @@ const reset_the_game = function _reset_the_game(){
   $('#Yellow_status_border').css('border-color','white');
   $('#Red_status_border').css('border-color','black');
 
-}
+};
 const draw_empty_board = function _draw_empty_board(){
   for(let j=0; j < NO_OF_X; j++){
     BOARD[j] = new Array(NO_OF_Y);
@@ -83,7 +84,7 @@ const draw_empty_board = function _draw_empty_board(){
     }
 
   }
-}
+};
 
 const make_empty_slot = function _make_empty_slot(x, y){
   let slot = {
@@ -94,7 +95,7 @@ const make_empty_slot = function _make_empty_slot(x, y){
     status: -1
   };
   return slot;
-}
+};
 
 const draw_cover = function _draw_cover(){
 //$('#Game_container').append("<div id='Board_cover'></div>");
@@ -105,7 +106,7 @@ $('.page-content').append("<div id='Board_cover'></div>");
     }
      $('#Board_cover').append('<div class="clearfix"></div>');
   }
-}
+};
 
 const draw_cover_cell = function _draw_cover_cell(){
   return `<div class="cover_cell"><svg  width="${CHECKER_DIAMETER}" height="${CHECKER_DIAMETER}"> \
@@ -117,7 +118,7 @@ const draw_cover_cell = function _draw_cover_cell(){
             </defs> \
             <rect x="0" y="0" width="${CHECKER_DIAMETER}" height="${CHECKER_DIAMETER}" mask="url(#mask)" fill-opacity="1" fill="blue"/> \
           </svg></div>`;
-}
+};
 
 const init_mouseover_effect = function _init_mouseovereffect(){
   for(let i=0; i < NO_OF_X; i ++){
@@ -132,7 +133,7 @@ const init_mouseover_effect = function _init_mouseovereffect(){
 
     $(`#${div_id}`).click(()=>add_checker(i));
   }
-}
+};
 
 /** Board position **/
 const adjust_board_position = function _adjust_board_position(){
@@ -149,7 +150,7 @@ const adjust_board_position = function _adjust_board_position(){
   $('#Board_cover').css('top' , `${BOARD_TOP}px`);
   $('#Board_cover').css('left' , `${BOARD_LEFT}px`);
   
-}
+};
 
 
 /** Add Checker**/
@@ -170,7 +171,7 @@ const add_checker = function _add_checker(x){
       change_player();
     }
   }
-}
+};
 
 const draw_animate_checker = function _draw_animate_checker(y, x){
       // set the id of the checker
@@ -193,7 +194,7 @@ const draw_animate_checker = function _draw_animate_checker(y, x){
 
     //animate the checker
     $(`#${checker_id}`).animate({top: `+=${BOARD[x][y].top}px`},1000);
-}
+};
 
 
 // if the y full, it will return -1
@@ -207,7 +208,7 @@ const check_empty_y_in_x = function _check_empty_y_in_x(x,board){
     }
   }
   return y;
-}
+};
 
 const change_player = function _change_player(){
   CURRENT_GAME.current_player = (CURRENT_GAME.current_player +1)%2;
@@ -221,7 +222,7 @@ const change_player = function _change_player(){
     $('#Yellow_status_border').css('border-color','white');
     $('#Red_status_border').css('border-color','black');
   }
-}
+};
 
 const check_game_status = function _check_game_status(y,x){
   const current_slot = BOARD[x][y];
@@ -250,7 +251,7 @@ const check_game_status = function _check_game_status(y,x){
     stop_game = win_actions(winObj.checker_pairs);
   }
   return stop_game;
-}
+};
 
 const win_actions = function _win_actions(checker_pairs){
   if (CURRENT_GAME.current_player === 0){
@@ -281,15 +282,15 @@ const win_actions = function _win_actions(checker_pairs){
   // Remove the interactions button prevent user click
   $('.x_button').remove();
   return true;
-}
+};
 
 /**WINNING CHECK**/
 const am_i_win = function _am_i_win(x,y, current_player, board){
   let obj = {
     isWin: false,
     checker_pairs: []
-  }
-  let win_ary = new Array();
+  };
+  let win_ary = [];
   win_ary.push(vertical_win(y, x, current_player, board));
   win_ary.push(horizontal_win(y, x, current_player,board));
   win_ary.push(backslash_win(y,x, current_player,board));
@@ -305,7 +306,7 @@ const am_i_win = function _am_i_win(x,y, current_player, board){
     }
   }
   return obj;
-}
+};
 
 const vertical_win = function _vertical_win(y, x, current_player, board){
   let counter = 0;
@@ -313,7 +314,7 @@ const vertical_win = function _vertical_win(y, x, current_player, board){
     isWin: false,
     start_slot: board[x][y],
     end_slot : board[x][y]
-  }
+  };
   if(y <= (NO_OF_Y - WINNING_CONDITION )){
     for(let i = y; i < NO_OF_Y  ; i++){
       if(current_player === board[x][i].status){
@@ -329,7 +330,7 @@ const vertical_win = function _vertical_win(y, x, current_player, board){
     }
   }
   return obj;
-}
+};
 const horizontal_win = function _horizontal_win(y,x, current_player,board){
   //left
   let counter = 0;
@@ -337,7 +338,7 @@ const horizontal_win = function _horizontal_win(y,x, current_player,board){
     isWin: false,
     start_slot: board[x][y],
     end_slot : board[x][y]
-  }
+  };
   for(let i = x; i >= 0; i-- ){
     if(current_player === board[i][y].status){
       counter++;
@@ -362,7 +363,7 @@ const horizontal_win = function _horizontal_win(y,x, current_player,board){
     obj.isWin = true;
   }
   return obj;
-}
+};
 
 const backslash_win = function _backslash_win(y,x, current_player,board){
   let counter = 0;
@@ -370,7 +371,7 @@ const backslash_win = function _backslash_win(y,x, current_player,board){
     isWin: false,
     start_slot: board[x][y],
     end_slot : board[x][y]
-  }
+  };
   let temp_x = x;
   let temp_y = y;
 
@@ -409,7 +410,7 @@ const backslash_win = function _backslash_win(y,x, current_player,board){
     obj.isWin = true;
   }
   return obj;
-}
+};
 
 const slash_win = function _slash_win(y,x, current_player,board){
   let counter = 0;
@@ -417,7 +418,7 @@ const slash_win = function _slash_win(y,x, current_player,board){
     isWin: false,
     start_slot: board[x][y],
     end_slot : board[x][y]
-  }
+  };
   let temp_x = x;
   let temp_y = y;
 
@@ -456,7 +457,7 @@ const slash_win = function _slash_win(y,x, current_player,board){
     obj.isWin = true;
   }
   return obj;
-}
+};
 
 /** AI **/
 
@@ -471,7 +472,7 @@ const pc_turn = function _pc_turn(){
       $('.x_button').show();
     },1000);
   }
-}
+};
 
 const available_xAry = function _avaiable_xAry(board){
   let xAry = [];
@@ -482,24 +483,11 @@ const available_xAry = function _avaiable_xAry(board){
     }
   }
   return xAry;
-}
+};
 
 const pc_add_checker = function _pc_add_checker(){
-
-  // if turn > 3, select the middle 3 to place
-  //if(CURRENT_GAME.turn === 2){
-  //  if(BOARD[3][5].status == -1){
-  //    add_checker(3);   
-  //  }else{
-  //    add_checker(2);
-  //  }
-    
- // }else{
-    //add_checker(minmax_BFS(BOARD, CURRENT_GAME.current_player, CURRENT_GAME.current_player));
     add_checker(alpha_beta_BFS(BOARD, CURRENT_GAME.current_player, CURRENT_GAME.current_player));
-  //}
-
-}
+};
 
 
 
@@ -570,7 +558,7 @@ const alpha_beta_BFS = function _aplpha_beta_BFS(board, current_player, your_pla
   //how if still cannot find any result? random it
   return objAry[0].position;
 
-}
+};
 
 const find_slot_with_more_space = function _find_slot_with_more_space(objAry){
   let positionAry = [];
@@ -600,21 +588,21 @@ const find_slot_with_more_space = function _find_slot_with_more_space(objAry){
   }
   objAry = get_max_score_positions(objAry);
   return objAry;
-}
+};
 
 const pretend_vertical_are_pc = function _pretend_vertical_are_pc(x,y,board){
   for(let i=y; i >= board[x].length; i--){
     board = change_board_status_to_pc_if_empty(x,i,board);
   }
   return board;
-}
+};
 
 const pretend_horizontal_are_pc = function _pretend_horizontal_are_pc(x,y,board){
   for(let i=0; i < NO_OF_X; i++){
     board = change_board_status_to_pc_if_empty(i,y,board);
   }
   return board;
-}
+};
 
 const pretend_slash_are_pc = function _pretend_slash_are_pc(x,y,board){
   //go -ve side first
@@ -635,7 +623,7 @@ const pretend_slash_are_pc = function _pretend_slash_are_pc(x,y,board){
     temp_y++;
   }
   return board;
-}
+};
 
 const pretend_backslash_are_pc = function _pretend_backslash_are_pc(x,y,board){
   //go -ve side first
@@ -656,14 +644,14 @@ const pretend_backslash_are_pc = function _pretend_backslash_are_pc(x,y,board){
     temp_y--;
   }
   return board;
-}
+};
 
 const change_board_status_to_pc_if_empty = function _change_board_status_to_pc_if_empty(x,y,board){
     if(board[x][y].status === -1){
       board[x][y].status = 1;
     }
     return board;
-}
+};
 
 const get_childs = function _get_childs(parent){
 
@@ -675,7 +663,7 @@ const get_childs = function _get_childs(parent){
     node_ary.push(create_node(parent.board,x_ary[j],y,current_player,parent.your_player,parent.x_ary_no, parent.level+1));
   }
   return node_ary;
-}
+};
 
 const create_node = function _create_node(board,x,y,current_player,your_player,x_ary_no, level){
   let node = {};
@@ -689,9 +677,9 @@ const create_node = function _create_node(board,x,y,current_player,your_player,x
       y:y,
       x_ary_no:x_ary_no,
       level: level
-  }
+  };
   return node;
-}
+};
 
 
 /**
@@ -713,7 +701,7 @@ const get_all_child_score = function _get_all_child_score(board, current_player,
     return -1;
   }
 
-}
+};
 
 /**this one need unit test**/
 const get_minmax_score = function _get_minmax_score(board, current_player, your_player, x,y){
@@ -727,7 +715,7 @@ const get_minmax_score = function _get_minmax_score(board, current_player, your_
     }
   }
   return score;
-}
+};
 
 function unit_test_get_minmax_score(){
   let board = BOARD.clone();
@@ -767,7 +755,7 @@ const get_max_score_position = function _get_max_score_position(score_ary){
     position =  -1;
   }
   return position;
-}
+};
 
 const get_max_score_positions = function _get_max_score_positions(objAry){
   let maxVal = objAry[0].scores;
@@ -791,7 +779,7 @@ const get_max_score_positions = function _get_max_score_positions(objAry){
     new_ary = objAry;
   }
   return new_ary;
-}
+};
 
 function test_position(){
   let ary = [7];
@@ -807,7 +795,6 @@ function test_position(){
   console.log(ary.length);
 }
 /** Utility 
-by meouw https://stackoverflow.com/users/12161/meouw
 Clone the array
 **/
 Array.prototype.clone = function() {
@@ -816,13 +803,12 @@ Array.prototype.clone = function() {
     new_ary[i] = new Array(this[i].length);
     for(let j=0; j < new_ary[i].length; j++){
       new_ary[i][j] = {
-        // -1 = empty , 0 = red player , 1 = yellow player
         status: this[i][j].status
-      }
+      };
     }
   }
   return new_ary;
-}
+};
 
 /** draw line for winning by 
 David D. Boling
@@ -830,7 +816,7 @@ https://codepen.io/daveboling/pen/jWOorz
 **/
 function lineDistance(x, y, x0, y0){
     return Math.sqrt((x -= x0) * x + (y -= y0) * y);
-};
+}
 
 function drawLine(a, b, line) {
   var pointA = $(a).offset();
