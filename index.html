@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
+  <!--Material design-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script src="https://unpkg.com/vue"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <!--Fonts from google-->
+    <link href="https://fonts.googleapis.com/css?family=Crushed" rel="stylesheet">
+  </head>
+  <body>
+
+
+
+  <div id="Game_menu">
+
+
+
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+    <div class="mdl-card__title">
+      <h2 class="mdl-card__title-text">Connect Four</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+    
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+    <button class="playing_method mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onClick="start_game(1)">One Player</button>
+    <button class="playing_method mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onClick="start_game(2)">Two Players</button>
+    </div>
+
+  </div>
+
+
+  </div>
+  </body>
+
+  <div id="Game_container">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Connect Four</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Connect Four</span>
+    <nav class="mdl-navigation">
+      <div class="mdl-navigation__link"  onClick="reset_the_game()">Restart</div>
+      <a class="mdl-navigation__link" href="" onClick="init_menu()">Exit to Menu</a>
+
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+    <div class="page-content">
+      <div id="Status_panel"> 
+        <div id="Red_status_border" class="status_border"><div id="Red_player_status" class="player_status"></div></div>
+        <div id="Status_wording">{{message}}<div class="mdl-spinner mdl-js-spinner is-active"></div></div> 
+        <div id="Yellow_status_border" class="status_border"><div id="Yellow_player_status" class="player_status"></div></div>
+      </div>
+    <div class="clearfix"></div>
+    </div>
+  </main>
+</div>
+    
+   
+
+  </div>
+
+
+</html>
