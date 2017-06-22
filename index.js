@@ -25,13 +25,13 @@ let BOARD = new Array(NO_OF_X);
 $(document).ready(function(){
     $( window ).resize(() => {adjust_board_position();});
 });
-
+/** This is the function for go back to the menu **/
 const init_menu = function _init_menu(){
   $('#Game_container').hide();
   $('#Game_menu').show();
 
 }
-
+/** this is the function to start the game ***/
 const start_game = function _start_game(game_mode){
   CURRENT_GAME.game_mode = game_mode;
   init_board();

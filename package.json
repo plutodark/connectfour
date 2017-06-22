@@ -1,0 +1,22 @@
+{
+  "name": "connectfour",
+  "version": "1.0.0",
+  "description": "Connect Four is a two-player connection game in which the players first choose a color and then take turns dropping colored discs from the top into a seven-column, six-row vertically suspended grid.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plutodark/connectfour.git"
+  },
+  "author": "Paul Lai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/plutodark/connectfour/issues"
+  },
+  "homepage": "https://github.com/plutodark/connectfour#readme",
+  "devDependencies": {
+    "jasmine": "^2.6.0"
+  }
+}
