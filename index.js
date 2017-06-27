@@ -62,12 +62,16 @@ const reset_the_game = function _reset_the_game(){
   draw_cover();
   adjust_board_position();
   init_mouseover_effect();
-  CURRENT_GAME.display_message = new Vue({
-      el:'#Status_wording',
-      data: {
-        message: 'Red Player\'s turn'
-      }
-    });
+  if(CURRENT_GAME.display_message.message != null){
+    CURRENT_GAME.display_message.message = "Red Player\'s turn";
+  }else{
+      CURRENT_GAME.display_message = new Vue({
+        el:'#Status_wording',
+        data: {
+          message: 'Red Player\'s turn'
+        }
+      });
+  }
   CURRENT_GAME.current_player = 0;
   CURRENT_GAME.turn = 1;
 
